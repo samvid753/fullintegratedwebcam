@@ -1,0 +1,351 @@
+{
+    "segments": [
+        {
+            "Segment": "1",
+            "bbox": [
+                [
+                    121,
+                    34
+                ],
+                [
+                    327,
+                    34
+                ],
+                [
+                    327,
+                    75
+                ],
+                [
+                    121,
+                    75
+                ]
+            ],
+            "Barcodes": [
+                "None"
+            ],
+            "Saved Image": "output\\segment_1_barcode.jpg",
+            "OCR Visual": "output\\segment_1_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "SCC_HU_Co"
+                ]
+            },
+            "Overlay Image": "output\\1_blended.png"
+        },
+        {
+            "Segment": "2",
+            "bbox": [
+                [
+                    149,
+                    3
+                ],
+                [
+                    169,
+                    3
+                ],
+                [
+                    169,
+                    31
+                ],
+                [
+                    149,
+                    31
+                ]
+            ],
+            "Barcodes": [
+                {
+                    "value": "Q6",
+                    "confidence": 0.623
+                }
+            ],
+            "Saved Image": "output\\segment_2_barcode.jpg",
+            "OCR Visual": "output\\segment_2_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "QUANTITY",
+                    "6"
+                ]
+            },
+            "Overlay Image": "output\\2_blended.png"
+        },
+        {
+            "Segment": "3",
+            "bbox": [
+                [
+                    21,
+                    73
+                ],
+                [
+                    109,
+                    73
+                ],
+                [
+                    109,
+                    115
+                ],
+                [
+                    21,
+                    115
+                ]
+            ],
+            "Barcodes": [
+                "None"
+            ],
+            "Saved Image": "output\\segment_3_barcode.jpg",
+            "OCR Visual": "output\\segment_3_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "LABEL TYPE",
+                    "BLK"
+                ]
+            },
+            "Overlay Image": "output\\3_blended.png"
+        },
+        {
+            "Segment": "4",
+            "bbox": [
+                [
+                    134,
+                    2
+                ],
+                [
+                    274,
+                    2
+                ],
+                [
+                    274,
+                    34
+                ],
+                [
+                    134,
+                    34
+                ]
+            ],
+            "Barcodes": [
+                "None"
+            ],
+            "Saved Image": "output\\segment_4_barcode.jpg",
+            "OCR Visual": "output\\segment_4_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "SUPPLIER",
+                    "17300001"
+                ]
+            },
+            "Overlay Image": "output\\4_blended.png"
+        },
+        {
+            "Segment": "5",
+            "bbox": [
+                [
+                    27,
+                    21
+                ],
+                [
+                    55,
+                    21
+                ],
+                [
+                    55,
+                    35
+                ],
+                [
+                    27,
+                    35
+                ]
+            ],
+            "Barcodes": [
+                {
+                    "value": "3S00002068",
+                    "confidence": 0.765
+                }
+            ],
+            "Saved Image": "output\\segment_5_barcode.jpg",
+            "OCR Visual": "output\\segment_5_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "SERIAL",
+                    "(3S]",
+                    "00002068"
+                ]
+            },
+            "Overlay Image": "output\\5_blended.png"
+        },
+        {
+            "Segment": "6",
+            "bbox": [
+                [
+                    5,
+                    49
+                ],
+                [
+                    189,
+                    49
+                ],
+                [
+                    189,
+                    69
+                ],
+                [
+                    5,
+                    69
+                ]
+            ],
+            "Barcodes": [
+                "None"
+            ],
+            "Saved Image": "output\\segment_6_barcode.jpg",
+            "OCR Visual": "output\\segment_6_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "LOT NO",
+                    "A12345"
+                ],
+                "Row 2": [
+                    "MFG DATE:",
+                    "EXP DATE: 12/30/2025"
+                ]
+            },
+            "Overlay Image": "output\\6_blended.png"
+        },
+        {
+            "Segment": "7",
+            "bbox": [
+                [
+                    0,
+                    0
+                ],
+                [
+                    93,
+                    0
+                ],
+                [
+                    93,
+                    17
+                ],
+                [
+                    0,
+                    17
+                ]
+            ],
+            "Barcodes": [
+                "None"
+            ],
+            "Saved Image": "output\\segment_7_barcode.jpg",
+            "OCR Visual": "output\\segment_7_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "ILOCATION"
+                ]
+            },
+            "Overlay Image": "output\\7_blended.png"
+        },
+        {
+            "Segment": "8",
+            "bbox": [
+                [
+                    2,
+                    16
+                ],
+                [
+                    192,
+                    16
+                ],
+                [
+                    192,
+                    40
+                ],
+                [
+                    2,
+                    40
+                ]
+            ],
+            "Barcodes": [
+                "None"
+            ],
+            "Saved Image": "output\\segment_8_barcode.jpg",
+            "OCR Visual": "output\\segment_8_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "Iscc HU Demo Content",
+                    "DESCRIPTION"
+                ]
+            },
+            "Overlay Image": "output\\8_blended.png"
+        },
+        {
+            "Segment": "9",
+            "bbox": [
+                [
+                    9,
+                    19
+                ],
+                [
+                    31,
+                    19
+                ],
+                [
+                    31,
+                    35
+                ],
+                [
+                    9,
+                    35
+                ]
+            ],
+            "Barcodes": [
+                "None"
+            ],
+            "Saved Image": "output\\segment_9_barcode.jpg",
+            "OCR Visual": "output\\segment_9_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "PO",
+                    "(K)",
+                    "4500007904"
+                ]
+            },
+            "Overlay Image": "output\\9_blended.png"
+        },
+        {
+            "Segment": "10",
+            "bbox": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    39,
+                    1
+                ],
+                [
+                    39,
+                    21
+                ],
+                [
+                    1,
+                    21
+                ]
+            ],
+            "Barcodes": [
+                "None"
+            ],
+            "Saved Image": "output\\segment_10_barcode.jpg",
+            "OCR Visual": "output\\segment_10_ocr_visual.jpg",
+            "OCR Rows": {
+                "Row 1": [
+                    "REV"
+                ]
+            },
+            "Overlay Image": "output\\10_blended.png"
+        }
+    ],
+    "key_value_pairs": {
+        "": "",
+        "QUANTITY": "",
+        "LOTNO": "(M",
+        "(IL": "",
+        "Iscc Hu Demo Content;": "",
+        "REV": "4"
+    }
+}
