@@ -5,6 +5,7 @@ import easyocr
 import os
 import re
 from pyzbar.pyzbar import decode
+
 from ultralytics import YOLO
 
 def process_label_image(image_path, label_model_path="best4.pt", barcode_model_path="barcodeorignal.pt"):
@@ -51,7 +52,7 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
         segment_roi = image[y:y+h, x:x+w].copy()
         seg_height, seg_width = segment_roi.shape[:2]
 
-        barcode_results = barcode_model(segment_roi, conf=0.5, iou=0.1)
+        barcode_results = barcode_model(segment_roi, conf=0.1, iou=0.1)
         barcode_boxes = barcode_results[0].boxes
         decoded_barcodes = []
 
@@ -73,10 +74,7 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
 
             for b in barcodes:
                 decoded_text = b.data.decode("utf-8")
-                decoded_barcodes.append({
-                    "value": decoded_text,
-                    "confidence": round(conf, 3)
-                })
+                decoded_barcodes.append(decoded_text)  # Only keep value, drop confidence
 
             cv2.rectangle(segment_roi, (bx, by), (bx + bw, by + bh), (255, 255, 255), -1)
 
@@ -124,14 +122,21 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
         ocr_vis_path = os.path.join(output_folder, f"segment_{key}_ocr_visual.jpg")
         cv2.imwrite(ocr_vis_path, segment_roi)
 
+        # Build structured key-value pairs from OCR rows (Row 1, Row 2, etc.)
+        ocr_kv_pairs = {}
+        for row_texts in row_dict.values():
+            if len(row_texts) >= 2:
+                key = " ".join(row_texts[:-1]).strip()
+                value = row_texts[-1].strip()
+                if key and value:
+                    ocr_kv_pairs[key] = value
+
         detected_objects.append({
-            "Segment": key,
-            "bbox": bbox,
             "Barcodes": decoded_barcodes if decoded_barcodes else ["None"],
-            "Saved Image": segment_path,
-            "OCR Visual": ocr_vis_path,
-            "OCR Rows": row_dict
+            
+            "OCR KeyValue": ocr_kv_pairs
         })
+
 
     for obj in detected_objects:
         img_path = obj.get("Saved Image")
@@ -233,7 +238,6 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
             for k, v in kv_pairs:
                 final_kv_pairs[k] = v
 
-    # Convert np types before saving
     def convert_numpy(obj):
         if isinstance(obj, dict):
             return {k: convert_numpy(v) for k, v in obj.items()}
@@ -248,7 +252,6 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
         else:
             return obj
 
-    # Save final result
     output_json = {
         "segments": detected_objects,
         "key_value_pairs": final_kv_pairs
