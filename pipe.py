@@ -8,7 +8,7 @@ from pyzbar.pyzbar import decode
 
 from ultralytics import YOLO
 
-def process_label_image(image_path, label_model_path="best4.pt", barcode_model_path="barcodeorignal.pt"):
+def process_label_image(image_path, label_model_path="best4.pt", barcode_model_path="best (1).pt"):
     output_folder = "output"
     os.makedirs(output_folder, exist_ok=True)
 
@@ -50,6 +50,8 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
     for key, bbox in segments.items():
         x, y, w, h = bbox
         segment_roi = image[y:y+h, x:x+w].copy()
+        cv2.imwrite(os.path.join(output_folder, f"segment_{key}_original.jpg"), segment_roi)
+
         seg_height, seg_width = segment_roi.shape[:2]
 
         barcode_results = barcode_model(segment_roi, conf=0.1, iou=0.1)
@@ -76,7 +78,23 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
                 decoded_text = b.data.decode("utf-8")
                 decoded_barcodes.append(decoded_text)  # Only keep value, drop confidence
 
-            cv2.rectangle(segment_roi, (bx, by), (bx + bw, by + bh), (255, 255, 255), -1)
+           # Clamp the coordinates to ensure they stay within segment boundaries
+            # Negative padding (inset) — make white box smaller than detection box
+           # Custom asymmetric padding: less on top, more on bottom
+            top_padding = 20
+            bottom_padding = 0
+            side_padding = 0
+
+            # Calculate inset box
+            inset_bx1 = min(max(bx + side_padding, 0), seg_width)
+            inset_by1 = min(max(by + top_padding, 0), seg_height)
+            inset_bx2 = max(min(bx + bw - side_padding, seg_width), 0)
+            inset_by2 = max(min(by + bh - bottom_padding, seg_height), 0)
+
+            # Make sure box is valid before drawing
+            if inset_bx1 < inset_bx2 and inset_by1 < inset_by2:
+                cv2.rectangle(segment_roi, (inset_bx1, inset_by1), (inset_bx2, inset_by2), (255, 255, 255), -1)
+
 
         segment_filename = f"segment_{key}_barcode.jpg"
         segment_path = os.path.join(output_folder, segment_filename)
@@ -85,7 +103,7 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
         results = reader.readtext(segment_path, detail=1)
         results = [r for r in results if r[2] > 0.5]
 
-        Y_THRESHOLD = 25
+        Y_THRESHOLD = 10
         rows = []
         results.sort(key=lambda r: r[0][0][1])
 
@@ -109,9 +127,13 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
         for i, row in enumerate(rows):
             row_dict[f"Row {i+1}"] = [text for _, text, _ in row]
 
+        from tabulate import tabulate
+
         print(f"\n🧾 OCR (row-wise) for segment {key}:")
-        for row_key, texts in row_dict.items():
-            print(f"{row_key}:", *texts)
+
+        # Convert rows into a list of lists (each row becomes a table row)
+        table_data = [texts for _, texts in row_dict.items()]
+        print(tabulate(table_data, tablefmt="grid"))
 
         for (bbox, text, conf) in results:
             top_left = tuple(map(int, bbox[0]))
@@ -185,7 +207,18 @@ def process_label_image(image_path, label_model_path="best4.pt", barcode_model_p
         lower_blue, upper_blue = np.array([85, 50, 50]), np.array([135, 255, 255])
 
         red_texts, blue_texts = [], []
-        results = reader.readtext(image, detail=1)
+        # Preprocess image for better OCR contrast
+        ocr_img = cv2.imread(segment_path)
+        gray = cv2.cvtColor(ocr_img, cv2.COLOR_BGR2GRAY)
+        # Optional: Increase contrast using thresholding
+        _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+        # Save debug image (optional, helps you verify OCR input)
+        cv2.imwrite(os.path.join(output_folder, f"segment_{key}_debug_thresh.jpg"), thresh)
+
+        # Run OCR on preprocessed image
+        results = reader.readtext(thresh, detail=1)
+
 
         for (bbox, text, confidence) in results:
             if confidence < 0.5:

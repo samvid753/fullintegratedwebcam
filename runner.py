@@ -9,7 +9,7 @@ import os
 r = rethinkdb.RethinkDB()
 
 # Path to the raw input image
-image_path = "Screenshot 2025-04-03 134728.png"
+image_path = "latestttt.jpg"
 if not image_path:
     print("❌ Failed to capture label. Exiting.")
     exit()

@@ -4,23 +4,37 @@
             "Barcodes": [
                 "None"
             ],
-            "OCR KeyValue": {}
+            "OCR KeyValue": {
+                "SCC": "HU_Co"
+            }
         },
         {
             "Barcodes": [
-                "Q6"
+                "3S00002068"
             ],
             "OCR KeyValue": {
-                "QUANTITY": "6"
+                "SERIAL": "00002068"
             }
         },
         {
             "Barcodes": [
                 "None"
             ],
+            "OCR KeyValue": {}
+        },
+        {
+            "Barcodes": [
+                "None"
+            ],
             "OCR KeyValue": {
-                "LABEL TYPE": "BLK"
+                "LOT NO.": "A12345"
             }
+        },
+        {
+            "Barcodes": [
+                "None"
+            ],
+            "OCR KeyValue": {}
         },
         {
             "Barcodes": [
@@ -32,20 +46,9 @@
         },
         {
             "Barcodes": [
-                "3S00002068"
+                "Q6"
             ],
-            "OCR KeyValue": {
-                "SERIAL (3S]": "00002068"
-            }
-        },
-        {
-            "Barcodes": [
-                "None"
-            ],
-            "OCR KeyValue": {
-                "LOT NO": "A12345",
-                "MFG DATE:": "EXP DATE: 12/30/2025"
-            }
+            "OCR KeyValue": {}
         },
         {
             "Barcodes": [
@@ -57,17 +60,7 @@
             "Barcodes": [
                 "None"
             ],
-            "OCR KeyValue": {
-                "Iscc HU Demo Content": "DESCRIPTION"
-            }
-        },
-        {
-            "Barcodes": [
-                "None"
-            ],
-            "OCR KeyValue": {
-                "PO (K)": "4500007904"
-            }
+            "OCR KeyValue": {}
         },
         {
             "Barcodes": [
